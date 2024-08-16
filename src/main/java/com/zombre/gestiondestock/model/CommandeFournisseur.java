@@ -1,15 +1,13 @@
 package com.zombre.gestiondestock.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.Instant;
 import java.util.List;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
@@ -22,9 +20,9 @@ public class CommandeFournisseur extends AbstractEntity {
     @Column(name = "datecommande")
     private Instant dateCommande;
 
-//    @Column(name = "etatcommande")
-//    @Enumerated(EnumType.STRING)
-//    private EtatCommande etatCommande;
+    @Column(name = "etatcommande")
+    @Enumerated(EnumType.STRING)
+    private EtatCommande etatCommande;
 
     @Column(name = "identreprise")
     private Integer idEntreprise;
@@ -33,7 +31,7 @@ public class CommandeFournisseur extends AbstractEntity {
     @JoinColumn(name = "idfournisseur")
     private Fournisseur fournisseur;
 
-//    @OneToMany(mappedBy = "commandeFournisseur")
-//    private List<LigneCommandeFournisseur> ligneCommandeFournisseurs;
+    @OneToMany(mappedBy = "commandeFournisseur")
+    private List<LigneCommandeFournisseur> ligneCommandeFournisseurs;
 
 }

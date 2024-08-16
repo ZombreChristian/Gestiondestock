@@ -1,14 +1,10 @@
 package com.zombre.gestiondestock.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
@@ -17,4 +13,8 @@ import lombok.NoArgsConstructor;
 public class Roles extends AbstractEntity{
     @Column(name = "rolename")
     private String roleName;
+
+    @ManyToOne
+    @JoinColumn(name = "idutilisateur")
+    private Utilisateur utilisateur;
 }

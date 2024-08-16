@@ -1,17 +1,14 @@
 package com.zombre.gestiondestock.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.Instant;
+import java.util.List;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
@@ -33,9 +30,18 @@ public class Utilisateur extends AbstractEntity{
     @Column(name = "motdepasse")
     private String moteDePasse;
 
-//    @Embedded
-//    private Adresse adresse;
+    @Embedded
+    private Adresse adresse;
 
     @Column(name = "photo")
     private String photo;
+
+    @ManyToOne
+    @JoinColumn(name = "identreprise")
+    private Entreprise entreprise;
+
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "utilisateur")
+    @JsonIgnore
+    private List<Roles> roles;
 }

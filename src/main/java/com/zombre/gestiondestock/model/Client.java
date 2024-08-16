@@ -1,17 +1,12 @@
 package com.zombre.gestiondestock.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.List;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
@@ -24,6 +19,9 @@ public class Client extends AbstractEntity{
     @Column(name = "prenom")
     private String prenom;
 
+    @Embedded
+    private Adresse adresse;
+
     @Column(name = " photo")
     private String photo;
 
@@ -33,7 +31,10 @@ public class Client extends AbstractEntity{
     @Column(name = "numTel")
     private String numTel;
 
-//    @OneToMany(mappedBy = "client")
-//    private List<CommandeClient> commandeClients;
+    @Column(name = "identreprise")
+    private Integer idEntreprise;
+
+    @OneToMany(mappedBy = "client")
+    private List<CommandeClient> commandeClients;
 
 }

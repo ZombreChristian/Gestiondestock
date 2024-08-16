@@ -1,15 +1,13 @@
 package com.zombre.gestiondestock.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.Instant;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
@@ -25,4 +23,15 @@ public class MvtStk extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "idarticle")
     private Article article;
+
+    @Column(name = "typemvt")
+    @Enumerated(EnumType.STRING)
+    private TypeMvtStk typeMvt;
+
+    @Column(name = "sourcemvt")
+    @Enumerated(EnumType.STRING)
+    private SourceMvtStk sourceMvt;
+
+    @Column(name = "identreprise")
+    private Integer idEntreprise;
 }
